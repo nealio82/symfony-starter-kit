@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 SHELL := /bin/bash
-COMPOSE := docker compose -f docker/docker-compose.yml
+COMPOSE := docker compose -f docker/docker-compose.yml -f docker/docker-compose-xdebug.override.yml
 APP := $(COMPOSE) exec -T php
 
 ##@ Setup / common commands
