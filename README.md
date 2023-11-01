@@ -7,6 +7,7 @@ Makefile script to give you a simple Symfony environment out-of-the-box, similar
 * Nginx
 * Postgres
 * PHP 8.2
+* Node.js with Yarn
 * Xdebug (coming soon)
 
 ### Using this kit

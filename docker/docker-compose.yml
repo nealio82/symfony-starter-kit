@@ -1,9 +1,9 @@
-version: '3.9'
+name: symfony-starter-kit
 
 services:
   web:
     image: nginx:alpine
-    container_name: symfony-starter-kit-nginx
+    container_name: nginx
     working_dir: /var/www/project
     volumes:
       - ../app:/var/www/project
@@ -11,21 +11,21 @@ services:
     ports:
       - "8080:80"
     networks:
-      - app
+      - symfony-starter-kit
 
   php:
     build:
       context: .
       dockerfile: dev.Dockerfile
     platform: linux/amd64
-    container_name: symfony-starter-kit-php
+    container_name: php
     working_dir: /var/www/project
     ports:
       - "9000:9000"
     volumes:
       - ../app:/var/www/project:rw,delegated
     networks:
-      - app
+      - symfony-starter-kit
     environment:
       APP_ENV: dev
       APP_DEBUG: 'true'
@@ -34,6 +34,7 @@ services:
 
   postgres:
     image: postgres:15
+    container_name: postgres
     ports:
       - "5432:5432"
     volumes:
@@ -43,16 +44,16 @@ services:
       POSTGRES_PASSWORD: postgrespass
       POSTGRES_USER: postgresuser
     networks:
-      - app
+      - symfony-starter-kit
 
   node:
     image: node:19
-    container_name: symfony-starter-kit-node
+    container_name: node
     working_dir: /var/www/project
     volumes:
       - ../app:/var/www/project
     networks:
-      - app
+      - symfony-starter-kit
 
 networks:
-  app:
+  symfony-starter-kit:
