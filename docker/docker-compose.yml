@@ -2,7 +2,9 @@ name: symfony-starter-kit
 
 services:
   web:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
     container_name: nginx
     working_dir: /var/www/project
     volumes:
@@ -10,13 +12,14 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - "8080:80"
+      - "443:443"
     networks:
       - symfony-starter-kit
 
   php:
     build:
       context: .
-      dockerfile: dev.Dockerfile
+      dockerfile: php.Dockerfile
     platform: linux/amd64
     container_name: php
     working_dir: /var/www/project
